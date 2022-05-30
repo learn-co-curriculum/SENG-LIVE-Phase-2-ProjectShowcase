@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const handleClick = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const handleClick = () => setIsDarkMode(!isDarkMode);
+
+  const buttonTextContent = isDarkMode ? "Light Mode" : "Dark Mode";
 
   return (
     <header>
@@ -13,9 +14,7 @@ const Header = () => {
         <span className="logo">{"//"}</span>
         Project Showcase
       </h1>
-      <button onClick={handleClick}>
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      <button onClick={handleClick}>{buttonTextContent}</button>
     </header>
   );
 };

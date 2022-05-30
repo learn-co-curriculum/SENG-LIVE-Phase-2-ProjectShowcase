@@ -41,7 +41,7 @@ body {
 .App.light {
   --color: var(--black);
   --background: var(--white);
-  --primary: var(--mid-turquoise);
+  --primary: var(--dark-turquoise);
 }
 
 section {
