@@ -13,45 +13,51 @@
 
 ### Deliverables
 
-#### 1. Create an `App` component that will:
+#### 1. Create an `App` component that:
 
-- Mount a `Header`, `ProjectForm` and `ProjectList` component
+- Returns the `Header`, `ProjectForm` and `ProjectList` components
 
-- Pass the array of `projects` to `ProjectList` as a prop
+- Provides the array of `projects` to `ProjectList` as props
 
-#### 2. Create a simple `header` component that will:
+#### 2. Create a `header` component that:
 
-- Render the text `Header`
+- Renders the text `Header`
 
-#### 3. Create a `ProjectForm` component that will:
+#### 3. Create a `ProjectForm` component that:
 
-- Render the text `ProjectForm`
+- Renders the text `ProjectForm`
 
-#### 4. Define a `ProjectList` component that will:
+#### 4. Define a `ProjectList` component that:
 
-- Accept `projects` as a prop
+- Accepts the props provided to the component
 
-- Map over the `projects` array
+- Destructures `projects` from the props object
 
-- Pass `project id` as a prop `key` to `ProjectListItem` component
+- Maps over the `projects` array to render the `ProjectListItem` component for each element:
 
-- Pass `project` object as a prop `project` to `ProjectListItem` component
+  - Provide a key prop set to the `project id` value
 
-#### 5. Define a `ProjectListItem` component that will:
+  - Provide each `project` object as a prop named `project`
 
-- Accept `project` as a prop
+#### 5. Define a `ProjectListItem` component that:
+
+- Accepts the props argument
+
+- Destructure the props object and return `project`
+
+- Destructure the properties of the `project` object
 
 - Create an `img` element nested inside a `figure` element
 
-- Set the `img` property `src` to the `project.image`
+- Set the `img` property `src` to the `img` variable created when destructuring
 
-- Set the `img` property `alt` to `project: ${project.name}`
+- Set the `img` property `alt` to `project: ${name}`
 
 - Create an `article` element with `h4` and `p` tags nested inside
 
-- Dynamically render each project name inside the `h4` tag
+  - Dynamically render each project name inside the `h4` tag
 
-- Dynamically render each project's about data inside the `p` tag
+  - Dynamically render each project's about data inside the `p` tag
 
 ### Creating a React App
 
