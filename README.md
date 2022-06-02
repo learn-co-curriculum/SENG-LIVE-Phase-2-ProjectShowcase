@@ -43,7 +43,7 @@
 
 - Accepts the props argument
 
-- Destructure the props object and return `project` 
+- Destructure the props object and return `project`
 
 - Destructure the properties of the `project` object
 
