@@ -21,9 +21,7 @@
 
 #### 2. Handle submitting the form and update state in parent using inverse data flow
 
-- When the form is submitted 2 tasks are necessary:
-
-  - Persist the new project to the server with a `POST` fetch request
+- When the form is submitted:
 
   - Update the `projects` state located in the parent component, `App` using inverse data flow
 
