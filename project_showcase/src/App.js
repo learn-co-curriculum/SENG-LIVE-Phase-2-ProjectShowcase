@@ -14,7 +14,7 @@ const App = () => {
     fetch("http://localhost:4000/projects")
       .then((resp) => resp.json())
       .then((projects) => setProjects(projects));
-  });
+  }, []);
 
   const onToggleDarkMode = () => {
     setIsDarkMode((isDarkMode) => !isDarkMode);
@@ -32,12 +32,33 @@ const App = () => {
     setProjectId(projectId);
   };
 
+  const onUpdateProject = (updatedProject) => {
+    const updatedProjects = projects.map((ogProject) => {
+      if (ogProject.id === updatedProject.id) {
+        return updatedProject;
+      } else {
+        return ogProject;
+      }
+    });
+
+    setProjects(updatedProjects);
+  };
+
+  const onDeleteProject = (projectId) => {
+    const updatedProjects = projects.filter(
+      (ogProject) => ogProject.id !== projectId
+    );
+
+    setProjects(updatedProjects);
+  };
+
   const renderForm = () => {
     if (projectId) {
       return (
         <ProjectEditForm
           projectId={projectId}
           completeEditing={completeEditing}
+          onUpdateProject={onUpdateProject}
         />
       );
     } else {
@@ -52,6 +73,7 @@ const App = () => {
       <ProjectList
         projects={projects}
         enterProjectEditModeFor={enterProjectEditModeFor}
+        onDeleteProject={onDeleteProject}
       />
     </div>
   );
