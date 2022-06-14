@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 const ProjectForm = ({ onAddProject }) => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: "",
     about: "",
     phase: "",
     link: "",
     image: "",
-  });
+  };
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-function ProjectEditForm({ projectId, completeEditing }) {
-  const [formData, setFormData] = useState({
+const ProjectEditForm = ({ projectId, completeEditing }) => {
+  const initialState = {
     name: "",
     about: "",
     phase: "",
     link: "",
     image: "",
-  });
+  };
 
-  const { name, about, phase, link, image } = formState;
+  const [formData, setFormData] = useState(initialState);
+
+  const { name, about, phase, link, image } = formData;
 
   useEffect(() => {
     fetch(`http://localhost:4000/projects/${projectId}`)
       .then((res) => res.json())
       .then((project) => setFormData(project));
-  }, []);
+  }, [projectId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +76,6 @@ function ProjectEditForm({ projectId, completeEditing }) {
       <button type="submit">Update Project</button>
     </form>
   );
-}
+};
 
 export default ProjectEditForm;
