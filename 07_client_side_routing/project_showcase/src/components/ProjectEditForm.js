@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const ProjectEditForm = ({ projectId, onUpdateProject }) => {
-  const [formState, setFormState] = useState({
+const ProjectEditForm = ({ onUpdateProject }) => {
+  const [formData, setFormData] = useState({
     name: "",
     about: "",
     phase: "",
@@ -9,17 +9,21 @@ const ProjectEditForm = ({ projectId, onUpdateProject }) => {
     image: "",
   });
 
-  const { name, about, phase, link, image } = formState;
+  const { name, about, phase, link, image } = formData;
+
+  // const { id } = useParams()
+
+  // const history = useHistory()
 
   useEffect(() => {
-    fetch(`http://localhost:4000/projects/${projectId}`)
+    fetch(`http://localhost:4000/projects/1`)
       .then((res) => res.json())
-      .then((project) => setFormState(project));
-  }, [projectId]);
+      .then((project) => setFormData(project));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -30,10 +34,10 @@ const ProjectEditForm = ({ projectId, onUpdateProject }) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(formState),
+      body: JSON.stringify(formData),
     };
 
-    fetch(`http://localhost:4000/projects/${projectId}`, configObj)
+    fetch(`http://localhost:4000/projects/1`, configObj)
       .then((resp) => resp.json())
       .then((updatedProj) => {
         onUpdateProject(updatedProj);

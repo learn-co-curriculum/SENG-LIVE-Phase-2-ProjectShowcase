@@ -4,13 +4,12 @@ import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
 import ProjectEditForm from "./components/ProjectEditForm";
-import ProjectDetail from "./components/ProjectDetail";
+import ProjectPage from "./components/ProjectPage"
 import Home from "./components/Home";
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [projects, setProjects] = useState([]);
-  const [projectId, setProjectId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/projects")
@@ -26,14 +25,6 @@ const App = () => {
     setProjects((projects) => [...projects, newProj]);
   };
 
-  const completeEditing = () => {
-    setProjectId(null);
-  };
-
-  const enterProjectEditModeFor = (projectId) => {
-    setProjectId(projectId);
-  };
-
   const onUpdateProject = (updatedProj) => {
     const updatedProjects = projects.map((ogProject) => {
       if (ogProject.id === updatedProj.id) {
@@ -43,7 +34,6 @@ const App = () => {
       }
     });
     setProjects(updatedProjects);
-    completeEditing();
   };
 
   const onDeleteProject = (deletedProj) => {
@@ -53,30 +43,17 @@ const App = () => {
     setProjects(updatedProjects);
   };
 
-  const renderForm = () => {
-    if (projectId) {
-      return (
-        <ProjectEditForm
-          projectId={projectId}
-          onUpdateProject={onUpdateProject}
-        />
-      );
-    } else {
-      return <ProjectForm onAddProject={onAddProject} />;
-    }
-  };
-
   return (
     <div className={isDarkMode ? "App" : "App light"}>
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
       <Home />
-      {renderForm()}
       <ProjectList
         projects={projects}
-        enterProjectEditModeFor={enterProjectEditModeFor}
         onDeleteProject={onDeleteProject}
       />
-      <ProjectDetail />
+      <ProjectEditForm onUpdateProject={onUpdateProject} />
+      <ProjectForm onAddProject={onAddProject} />
+      <ProjectPage />
     </div>
   );
 };

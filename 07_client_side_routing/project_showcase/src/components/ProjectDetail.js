@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const ProjectDetail = () => {
   const [claps, setClaps] = useState(0);
   const [project, setProject] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const id = 1;
 
@@ -12,15 +11,12 @@ const ProjectDetail = () => {
       .then((r) => r.json())
       .then((project) => {
         setProject(project);
-        setIsLoaded(true);
       });
   }, [id]);
 
-  if (!isLoaded) return <h2>Loading...</h2>;
-
   const { image, name, about, link, phase } = project;
 
-  function handleClapClick() {
+  const handleClapClick = () => {
     setClaps((claps) => claps + 1);
   }
 
