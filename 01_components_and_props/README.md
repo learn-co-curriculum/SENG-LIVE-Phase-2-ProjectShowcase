@@ -140,3 +140,4 @@ The props argument in our Card component defines an object that React will pass 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
 - [ES7+ React/Redux/React-Native/JS snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
