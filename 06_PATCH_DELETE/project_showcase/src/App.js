@@ -8,13 +8,25 @@ import ProjectEditForm from "./components/ProjectEditForm";
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [projects, setProjects] = useState([]);
-  const [projectId, setProjectId] = useState(null);
+  const [projectToEdit, setProjectToEdit] = useState(null);
+  const [selectedPhase, setSelectedPhase] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:4000/projects")
-      .then((resp) => resp.json())
+    let url;
+    if (selectedPhase && searchQuery) {
+      url = `http://localhost:4000/projects?phase=${selectedPhase}&q=${encodeURI(searchQuery)}`;
+    } else if (searchQuery) {
+      url = `http://localhost:4000/projects?q=${encodeURI(searchQuery)}`;
+    } else if (selectedPhase) {
+      url = `http://localhost:4000/projects?phase=${selectedPhase}`;
+    } else {
+      url = "http://localhost:4000/projects";
+    }
+    fetch(url)
+      .then((res) => res.json())
       .then((projects) => setProjects(projects));
-  });
+  }, [selectedPhase, searchQuery])
 
   const onToggleDarkMode = () => {
     setIsDarkMode((isDarkMode) => !isDarkMode);
@@ -24,20 +36,20 @@ const App = () => {
     setProjects((projects) => [...projects, newProj]);
   };
 
-  const completeEditing = () => {
-    setProjectId(null);
+  const onCompleteEditing = () => {
+    setProjectToEdit(null);
   };
 
-  const enterProjectEditModeFor = (projectId) => {
-    setProjectId(projectId);
+  const onProjectEdit = (projectToEdit) => {
+    setProjectToEdit(projectToEdit);
   };
 
   const renderForm = () => {
-    if (projectId) {
+    if (projectToEdit) {
       return (
         <ProjectEditForm
-          projectId={projectId}
-          completeEditing={completeEditing}
+          projectToEdit={projectToEdit}
+          onCompleteEditing={onCompleteEditing}
         />
       );
     } else {
@@ -51,7 +63,9 @@ const App = () => {
       {renderForm()}
       <ProjectList
         projects={projects}
-        enterProjectEditModeFor={enterProjectEditModeFor}
+        onProjectEdit={onProjectEdit}
+        setSelectedPhase={setSelectedPhase}
+        setSearchQuery={setSearchQuery}
       />
     </div>
   );

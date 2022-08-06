@@ -7,6 +7,11 @@
 
 ## Deliverables
 
+- Review changes to the project showcase app to prepare for editing
+- get our ProjectEditForm working to persist changes to db.json and to local state
+- get the delete button working for projects so it removes the project from db.json and local state
+- get the clap button working for projects so the number of claps persists to db.json and local state
+
 #### 1. Review changes to the project showcase application
 
 - Observe the `ProjectEditForm` component
@@ -15,7 +20,7 @@
 
 - Observe the updates applied in the `App` component
 
-- Update the `useEffect` inside the `ProjectEditForm` component so that the side effect will run upon `projectId` updates
+- Update the `useEffect` inside the `ProjectEditForm` component so that the side effect will run upon `projectToEdit` updates
 
 #### 2. Submit the edit project form and make a PATCH request
 
