@@ -3,8 +3,12 @@ import React, { useState } from "react";
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const toggleDarkMode = (e) => {
+  const toggleDarkMode = () => {
     setIsDarkMode(isDarkMode => !isDarkMode)
+  }
+
+  const handleToggleDarkMode = (e) => {
+    toggleDarkMode();
   }
 
   return (
@@ -13,7 +17,7 @@ const Header = () => {
         <span className="logo">{"//"}</span>
         Project Showcase
       </h1>
-      <button onClick={toggleDarkMode}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
+      <button onClick={handleToggleDarkMode}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
     </header>
   );
 }
