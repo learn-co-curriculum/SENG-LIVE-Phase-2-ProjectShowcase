@@ -38,9 +38,11 @@ To keep track of each input's value, you need:
 
 1. State for the input that will manage the input's value
 
-2. An `onChange` listener attached to the input to monitor users behavior and update state as the user interacts with the field
+2. A `value` attribute on the input that corresponds to that piece of state
 
-3. A `value` attribute on the input that corresponds to that piece of state
+3. An `onChange` listener attached to the input to monitor users behavior and update state as the user interacts with the field
+
+
 
 Form components also need an `onSubmit` listener on the form element to handle the submitted form data.
 
@@ -72,7 +74,7 @@ If an object or array is mutated directly and then set as the new value for stat
 state.prop = "New Value"
 setState(state);
 
-// do this instead because it will (newState object will be different from the old one)
+// do this instead because it will update the DOM(newState object will be different from previous)
 setState(state => ({...state, prop: "New Value"}) )
 ```
 
@@ -193,11 +195,11 @@ const handleOnChange = (e) => {
   // e.target will return an object, the element that triggered the event with properties
   // including name and value. Object destructuring is used to extract that values from e.target
 
+  const { name, value } = e.target;
+
   // This is the same as doing:
   // const name = e.target.name
   // const value = e.target.value
-
-  const { name, value } = e.target;
 
   // The setter function is then invoked and a new object will  be created with the 
   // contents of the previous formData spread and the new key/value added to avoid overwriting the 
@@ -234,6 +236,13 @@ const handleSubmit = (e) => {
 
 The state of `projects` is defined inside of the parent component `App` and the behavior occurs in the child component `ProjectForm`. When the new project is submitted, `projects` will need to be updated to include it.
 
+💡 What do we need to do?
+
+<!-- slide -->
+
+## Implement the Inverse Data Flow Pattern!
+
+![Inverse Data Flow for adding projects](./assets/react-inverse-data-flow-add-product.drawio.svg)
 <!-- slide style="text-align: left;" -->
 
 Here is where the process of inverse data flow will need to occur:
@@ -246,7 +255,7 @@ Here is where the process of inverse data flow will need to occur:
 
 ```js
 const onAddProject = (newProject) => {
-  setProjects([...projects, newProject]);
+  setProjects(projects => [...projects, newProject]);
 };
 ```
 
