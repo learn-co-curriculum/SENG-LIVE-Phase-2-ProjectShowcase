@@ -30,7 +30,6 @@ The goals for Phase 2: </h2>
 ✳️ Practice writing components
 ✳️ Define props and how to create them
 ✳️ Recognize destructured props and how to work with them
-✳️ Recognize best practices when writing components and props
 ✳️ Render multiple components from a list
 
 <!-- slide -->

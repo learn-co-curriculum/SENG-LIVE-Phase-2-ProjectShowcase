@@ -8,7 +8,6 @@
 - [ ] Review how a component is written
 - [ ] Explain what props are and how to create them
 - [ ] Recognize destructured props and how to work with them
-- [ ] Recognize best practices when writing components and props
 - [ ] Observe how to render multiple components from a list
 
 ### Deliverables
