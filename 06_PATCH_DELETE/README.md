@@ -49,3 +49,6 @@
 - Send a `PATCH` request when the `clapsCount` is updated through a click event
 
 - Update the `projects` state in the parent component `App` using the `.map` function
+
+
+![Updating an array of Objects in React state](assets/updating-an-array-of-objects-in-state.drawio.svg)

@@ -6,7 +6,7 @@ const ProjectListItem = ({ project, onEditProject }) => {
 
   const [clapCount, setClapCount] = useState(0);
 
-  const handleClap = (clapCount) => setClapCount(clapCount + 1);
+  const handleClap = () => setClapCount(clapCount => clapCount + 1);
 
   const handleEditClick = () => {
     onEditProject(project);

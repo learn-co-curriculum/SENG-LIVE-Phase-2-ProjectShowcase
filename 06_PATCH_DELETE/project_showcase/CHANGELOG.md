@@ -17,7 +17,7 @@ To allow users to edit projects, some UI changes were necessary:
   - define a `onEditProject` callback function that will be called when a user clicks the edit button and store the chosen project in the piece of App state
   - pass the `onEditProject` callback to `ProjectList` -> then to `ProjectListItem`
 - Within the `ProjectEditForm` component, we need to:
-  - set up our `formState` as an object in this case
+  - set up our `formData` as an object in this case
   - add a `handleChange` event handler that will dynamically (and non-destructively) update the object
   - add a `handleSubmit` event handler that will make a PATCH request to update the project in the db
 - In `ProjectList` we need to:
@@ -32,9 +32,9 @@ To allow users to edit projects, some UI changes were necessary:
   - add an event listener to the edit icon in ProjectListItem that invokes the `onEditProject` callback with the `project` received as a prop as its argument.
 - In `ProjectEditForm` we need to
   - accept `projectToEdit` as a prop
-  - refactor component to use a `formState` object in state
-  - create an `initialState` variable that points to a `formState` object with empty strings for all values
-  - add a `resetForm` function that will reset `formState` to the `initialState`
+  - refactor component to use a `formData` object in state
+  - create an `initialState` variable that points to a `formData` object with empty strings for all values
+  - add a `resetForm` function that will reset `formData` to the `initialState`
   - add a `useEffect` hook that runs when `projectToEdit.id` changes
     - inside the side effect function, fetch the project with the matching id
     - load its properties into the formData so they populate the inputs
@@ -158,7 +158,7 @@ import React, { useState } from "react";
 function ProjectEditForm({ projectToEdit, onUpdateProject }) {
 ```
 
-### set up our `formState` as an object in this case, we're going to load the object data from the `projectToEdit` and then hit the API to ensure we have the most up to date version
+### set up our `formData` as an object in this case, we're going to load the object data from the `projectToEdit` and then hit the API to ensure we have the most up to date version
 
 ```js
 const [formData, setFormData] = useState(projectToEdit);
@@ -225,15 +225,15 @@ const [formData, setFormData] = useState(projectToEdit);
 <h3>Edit Project</h3>
 ```
 
-### Destructure values out of `formState` so the JSX still works:
+### Destructure values out of `formData` so the JSX still works:
 
 Put this above the return:
 
 ```jsx
-const { name, about, phase, link, image } = formState;
+const { name, about, phase, link, image } = formData;
 ```
 
-### Confirm that the `handleOnChange` event handler that will dynamically (and non-destructively) update the `formState`
+### Confirm that the `handleOnChange` event handler that will dynamically (and non-destructively) update the `formData`
 
 ```js
 const handleOnChange = (e) => {
