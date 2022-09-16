@@ -23,13 +23,14 @@ const ProjectList = () => {
     return project.name.toLowerCase().includes(searchQuery.toLowerCase())
   })
 
-  const projectListItems = searchResults.map(project => (
-    <ProjectListItem
-      key={project.id}
-      {...project}
-    />
-  ))
-  
+  const renderProjects = (projects) => {
+    return projects.map(project => (
+      <ProjectListItem
+        key={project.id}
+        {...project}
+      />
+    ))
+  }
 
   return (
     <section>
@@ -50,7 +51,7 @@ const ProjectList = () => {
         onChange={handleSearch}
       />
 
-      <ul className="cards">{projectListItems}</ul>
+      <ul className="cards">{renderProjects(searchResults)}</ul>
     </section>
   );
 };

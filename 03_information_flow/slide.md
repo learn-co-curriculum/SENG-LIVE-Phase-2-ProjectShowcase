@@ -59,7 +59,14 @@ From [Step 4 of Thinking in React](https://reactwithhooks.netlify.app/docs/think
 
 <center><img  src="assets/component-hierarchy-with-data-flow.drawio.svg" alt="Component Hierarchy" height="700" width="1500"></center>
 
-💡 Question: Why have projects in state at the App component level? Why not store projects as state in ProjectList?
+💡 Question 1: Do you see a problem with storing `isDarkMode` in state within the `Header` component?
+💡 Question 2: How about storing `projects` in state within the `ProjectList` component?
+💡 Question 3: How about storing `searchQuery` in state within the `ProjectList` component?
+
+
+<!-- slide -->
+## Updated Data Flow
+<center><img  src="assets/component-hierarchy-with-updated-data-flow.drawio.svg" alt="Component Hierarchy" height="700" width="1500"></center>
 
 <!-- slide style="text-align: left;" -->
 
@@ -128,7 +135,7 @@ const App = () => {
 Second, create the `onToggleDarkMode` function that will update the `isDarkMode` state:
 
 ```js
-const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
+const onToggleDarkMode = () => setIsDarkMode(isDarkMode => !isDarkMode);
 ```
 
 <br>
@@ -147,7 +154,7 @@ Destructure the props in the argument and use the variables to render the button
 
 ```js
 const Header = ({ isDarkMode, onToggleDarkMode }) => {
-  const handleToggleDarkModeClick = (e) => {
+  const handleToggleDarkMode = (e) => {
     onToggleDarkMode();
   }
 
@@ -157,13 +164,48 @@ const Header = ({ isDarkMode, onToggleDarkMode }) => {
         <span className="logo">{"//"}</span>
         Project Showcase
       </h1>
-      <button onClick={handleToggleDarkModeClick}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
+      <button onClick={handleToggleDarkMode}>{isDarkMode ? "Light Mode" : "Dark Mode"}</button>
     </header>
   );
 };
 
 export default Header;
 ```
+
+<!-- slide -->
+
+## Lifting Projects in State
+
+We need to modify `projects` from `ProjectForm` as well as access it from `ProjectList` so it needs to live in a common parent, in this case, `App` will do:
+
+```js
+// this needs to move up
+const [projects, setProjects] = useState([]);
+// as does the function that updates this piece of state
+const loadProjects = () => {
+  fetch("http://localhost:4000/projects")
+    .then((res) => res.json())
+    .then((projects) => setProjects(projects));
+}
+```
+
+<!-- slide -->
+
+## Passing down the props
+
+After lifting state up, we need to pass it down as props to the component where it lived before!
+
+```js
+// src/App.js
+<ProjectList projects={projects} onLoadProjects={onLoadProjects} />
+
+// src/components/ProjectList.js
+const ProjectList = ({ projects, onLoadProjects }) => { 
+```
+
+Notice we're renaming `loadProjects` to `onLoadProjects` to indicate that it is a callback function that will be associated with an event handler in a child component. 
+
+Naming convention => `onBehaviorName`
 
 <!-- slide style="text-align: left;" -->
 
