@@ -18,6 +18,9 @@ const Header = ({ isDarkMode, onToggleDarkMode }) => {
           <a className="button" href="/projects/new">
             Add Project
           </a>
+          <a className="button" href="/about">
+            About
+          </a>
           <button onClick={onToggleDarkMode}>{buttonTextContent}</button>
         </div>
       </nav>
