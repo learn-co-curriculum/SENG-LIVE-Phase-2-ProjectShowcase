@@ -86,27 +86,25 @@ The term 'side effect' not only applies to React but to all functional programmi
 
 <br>
 
-💡 These are operations that will still effect our component, but can't specifically happen during the rendering
+💡 These are operations that will still have an effect on our component, but won't happen during the rendering process (they'll happen after)
 
 <br>
 
+<!-- slide -->
+
+<img src="assets/react-component-lifecycle.png" alt="React component lifecycle diagram" height="800" />
+
 <!-- slide style="text-align: left;" -->
 
-<h2 style="text-align: center;"><strong> Examples of React component side effects </strong></h2>
+<h2 style="text-align: center;"><strong> Examples of side effects</strong></h2>
 
 <br>
 
 - Fetching Data from a server
 
-- Interacting with a browsers API like the `document` or `window`
-
-- Utilizing interval timers such as `setInterval` or `setTimeout`
-
-<!-- slide -->
-
-<p style="font-size: 2em">What useEffect Does</p>
-
-- Synchronizes a side effect with a react component's rendering.
+- Interacting with a browser API like the `document` or `window`
+  - Utilizing interval timers such as `setInterval` or `setTimeout` 
+  - adding a `mousemove` event listener to the `window` object
 
 <!-- slide style="text-align: left;" -->
 
@@ -128,6 +126,12 @@ The term 'side effect' not only applies to React but to all functional programmi
 <br>
 
 - `useEffect()` is essentially telling React that the component needs to do something else AFTER the component has rendered
+
+<!-- slide -->
+
+<p style="font-size: 2em">What useEffect Does</p>
+
+- Synchronizes a side effect with a react component's rendering.
 
 <!-- slide style="text-align: left;" -->
 
@@ -187,6 +191,10 @@ useEffect(() => {
 
 - That means that the side effect will run once upon the components initial render and then only re-run when the value of the provided data changes
 
+Let's go use this in our application by:
+✅ making sure that the projects we fetch from the database align with the phase we have selected by clicking one of the phase button filters
+✅ reworking the search input so it makes calls to our api when we type in the input rather than filtering through local state in react
+
 
 <!-- slide style="text-align: left;" -->
 
@@ -236,7 +244,15 @@ const Timer = () => {
 
   - When the component unmounts (is removed from the DOM)
 
-  **NOTE:** In Development when using React `StrictMode` (which we are) components will be doubled rendered when they first mount to help you spot errors more easily because it runs the component through a mount and update right away. In the codesandbox demo, I removed Strict Mode so we can more easily understand what's happening with the cleanup.
+  <img src="assets/react-component-lifecycle.png" alt="React component lifecycle diagram" height="800" />
+
+<!-- slide -->
+
+  **NOTE:** In Development when using React `StrictMode` (which we are):
+  - components will be doubled rendered when they first mount to help you spot errors more easily 
+  - the component will go through a mount and update right away
+  - In the codesandbox demo, I removed Strict Mode so we can more easily understand what's happening with the cleanup.
+  - In your own development it may seem like the cleanup function is running right when the component loads. The double render from StrictMode is the reason.
 
 <!-- slide -->
 
