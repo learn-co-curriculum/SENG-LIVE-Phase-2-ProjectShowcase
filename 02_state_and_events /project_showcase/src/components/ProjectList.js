@@ -1,10 +1,12 @@
 import ProjectListItem from "./ProjectListItem";
 
-const ProjectList = ({ projects }) => {
+import projects from "../projects";
 
-  const projectListItems = projects.map((project) => (
-    <ProjectListItem key={project.id} {...project} />
-  ));
+const ProjectList = () => {
+
+  const projectListItems = projects.map(project => {
+    return <ProjectListItem key={project.id} project={project} />
+  })
 
 
   return (
