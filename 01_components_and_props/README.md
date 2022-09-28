@@ -8,7 +8,6 @@
 - [ ] Review how a component is written
 - [ ] Explain what props are and how to create them
 - [ ] Recognize destructured props and how to work with them
-- [ ] Recognize best practices when writing components and props
 - [ ] Observe how to render multiple components from a list
 
 ### Deliverables
@@ -140,3 +139,4 @@ The props argument in our Card component defines an object that React will pass 
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
 - [ES7+ React/Redux/React-Native/JS snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
